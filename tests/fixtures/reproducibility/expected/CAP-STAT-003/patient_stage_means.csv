@@ -1,0 +1,17 @@
+patient,class,stage,outcome,n_samples
+p0,B,NDMM,40.0,1
+p0,B,RRMM,41.0,1
+p0,T,NDMM,50.0,1
+p0,T,RRMM,51.0,1
+p1,B,NDMM,41.0,1
+p1,B,RRMM,43.0,1
+p1,T,NDMM,51.0,1
+p1,T,RRMM,53.0,1
+p2,B,NDMM,42.0,1
+p2,B,RRMM,45.0,1
+p2,T,NDMM,52.0,1
+p2,T,RRMM,55.0,1
+p3,B,NDMM,43.0,1
+p3,B,RRMM,47.0,1
+p3,T,NDMM,53.0,1
+p3,T,RRMM,57.0,1

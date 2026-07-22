@@ -1,0 +1,79 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.env
+.env.cellstate.local
+config/resources.env
+.venv/
+venv/
+conda-env/
+*.egg-info/
+
+# Runtime outputs and caches
+analysis_cache/
+outputs/
+outputs_backup_*/
+artifacts/cache/
+artifacts/runs/
+semantic_cache*.json
+demo_archive/
+src/cellstate/reproducibility/staging/
+public-export-*/
+public_export/audits/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*.bak
+*.before_*
+*.pre_index_alias_fix
+.DS_Store
+
+# Large biological data
+*.h5ad
+*.h5
+*.hdf5
+*.loom
+*.mtx
+*.mtx.gz
+*.rds
+*.RData
+*.Rhistory
+
+# Model checkpoints
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.bin
+*.onnx
+
+# Downloaded or locally generated TF resources (code and documentation remain public)
+resources/tf_activity/*.tsv
+resources/tf_activity/tf_resources_*.json
+
+# Archives and generated presentation artifacts
+*.zip
+*.tar
+*.tar.gz
+*.7z
+generated_reports/
+generated_figures/
+
+# Jupyter
+.ipynb_checkpoints/
+semantic_cache.json
+docs/history/chatlog.md
+
+# Private development history and architecture
+docs/history/chatlog.md
+docs/constitution/
+AGENTS.md
+ARCHITECTURE.md
+docs/consitution/

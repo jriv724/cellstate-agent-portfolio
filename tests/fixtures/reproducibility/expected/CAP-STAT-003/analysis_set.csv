@@ -1,0 +1,17 @@
+sample,patient,class,stage,age,dataset
+p0-n,p0,B,NDMM,40,d1
+p0-r,p0,B,RRMM,41,d1
+p1-n,p1,B,NDMM,41,d1
+p1-r,p1,B,RRMM,43,d1
+p2-n,p2,B,NDMM,42,d1
+p2-r,p2,B,RRMM,45,d1
+p3-n,p3,B,NDMM,43,d1
+p3-r,p3,B,RRMM,47,d1
+p0-n,p0,T,NDMM,50,d1
+p0-r,p0,T,RRMM,51,d1
+p1-n,p1,T,NDMM,51,d1
+p1-r,p1,T,RRMM,53,d1
+p2-n,p2,T,NDMM,52,d1
+p2-r,p2,T,RRMM,55,d1
+p3-n,p3,T,NDMM,53,d1
+p3-r,p3,T,RRMM,57,d1

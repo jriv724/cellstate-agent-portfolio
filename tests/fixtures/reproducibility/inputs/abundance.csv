@@ -1,0 +1,17 @@
+sample,patient,dataset,stage_model_v2,preserved,macro
+n1,p-n1,d1,NBM,B,Lymphoid
+n1,p-n1,d1,NBM,B,Lymphoid
+n1,p-n1,d1,NBM,T,Lymphoid
+n1,p-n1,d1,NBM,Plasma,Plasma
+n2,p-n2,d2,NBM,B,Lymphoid
+n2,p-n2,d2,NBM,T,Lymphoid
+n2,p-n2,d2,NBM,T,Lymphoid
+n2,p-n2,d2,NBM,T,Lymphoid
+s1,p-s1,d1,SMM,B,Lymphoid
+s1,p-s1,d1,SMM,B,Lymphoid
+s1,p-s1,d1,SMM,B,Lymphoid
+s1,p-s1,d1,SMM,T,Lymphoid
+s2,p-s2,d2,SMM,B,Lymphoid
+s2,p-s2,d2,SMM,T,Lymphoid
+s2,p-s2,d2,SMM,Plasma,Plasma
+s2,p-s2,d2,SMM,Plasma,Plasma

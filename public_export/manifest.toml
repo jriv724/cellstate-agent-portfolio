@@ -1,0 +1,168 @@
+version = 1
+default_max_bytes = 20971520
+
+[[include]]
+source = "README.md"
+destination = "README.md"
+category = "documentation"
+text = true
+sanitization = "complete"
+
+[[include]]
+source = "prototype_agent.py"
+destination = "prototype_agent.py"
+category = "entrypoint"
+text = true
+sanitization = "complete"
+
+[[include]]
+source = "run-cellstate-agent.sh"
+destination = "run-cellstate-agent.sh"
+category = "entrypoint"
+text = true
+sanitization = "complete"
+
+[[include]]
+source = "pyproject.toml"
+destination = "pyproject.toml"
+category = "packaging"
+text = true
+sanitization = "complete"
+
+[[include]]
+source = ".gitignore"
+destination = ".gitignore"
+category = "packaging"
+text = true
+sanitization = "complete"
+
+[[include]]
+source = "config/resources.env.example"
+destination = "config/resources.env.example"
+category = "configuration"
+text = true
+sanitization = "complete"
+
+[[include]]
+pattern = "src/cellstate/**/*.py"
+destination_root = "src/cellstate"
+source_root = "src/cellstate"
+category = "production"
+text = true
+sanitization = "reviewed"
+
+[[include]]
+pattern = "src/cellstate/nodes/*.R"
+destination_root = "src/cellstate/nodes"
+source_root = "src/cellstate/nodes"
+category = "scientific-runtime"
+text = true
+sanitization = "reviewed"
+
+[[include]]
+source = "scripts/prepare_tf_resources.py"
+destination = "scripts/prepare_tf_resources.py"
+category = "resource-tooling"
+text = true
+sanitization = "reviewed"
+
+[[include]]
+source = "scripts/validate_tf_resources.py"
+destination = "scripts/validate_tf_resources.py"
+category = "resource-tooling"
+text = true
+sanitization = "reviewed"
+
+[[include]]
+source = "resources/tf_activity/README.md"
+destination = "resources/tf_activity/README.md"
+category = "resource-documentation"
+text = true
+sanitization = "reviewed"
+
+[[include]]
+pattern = "tests/test_*.py"
+destination_root = "tests"
+source_root = "tests"
+category = "tests"
+text = true
+sanitization = "reviewed"
+
+[[include]]
+pattern = "tests/fixtures/**/*.tsv"
+destination_root = "tests/fixtures"
+source_root = "tests/fixtures"
+category = "synthetic-fixtures"
+text = true
+sanitization = "synthetic"
+
+[[include]]
+pattern = "tests/fixtures/**/*.csv"
+destination_root = "tests/fixtures"
+source_root = "tests/fixtures"
+category = "synthetic-fixtures"
+text = true
+sanitization = "synthetic"
+
+[[include]]
+pattern = "tests/fixtures/**/*.json"
+destination_root = "tests/fixtures"
+source_root = "tests/fixtures"
+category = "synthetic-fixtures"
+text = true
+sanitization = "synthetic"
+
+[[include]]
+pattern = "docs/public/*.md"
+destination_root = "docs/public"
+source_root = "docs/public"
+category = "documentation"
+text = true
+sanitization = "complete"
+
+[[include]]
+source = "PUBLIC_EXPORT_MANIFEST.md"
+destination = "PUBLIC_EXPORT_MANIFEST.md"
+category = "documentation"
+text = true
+sanitization = "complete"
+
+[[include]]
+source = "tests/fixtures/README.md"
+destination = "tests/fixtures/README.md"
+category = "synthetic-fixtures"
+text = true
+sanitization = "complete"
+
+[[include]]
+source = "public_export/manifest.toml"
+destination = "public_export/manifest.toml"
+category = "publication-tooling"
+text = true
+sanitization = "complete"
+
+[[include]]
+source = "scripts/build_public_export.py"
+destination = "scripts/build_public_export.py"
+category = "publication-tooling"
+text = true
+sanitization = "complete"
+
+[[include]]
+source = "tests/test_public_export.py"
+destination = "tests/test_public_export.py"
+category = "publication-tooling"
+text = true
+sanitization = "complete"
+
+[[blocker]]
+kind = "license"
+message = "Project software license and copyright holder require owner approval."
+
+[[blocker]]
+kind = "deferred-review"
+message = "src/cellstate/data_interchange/reconstruct_seurat.R requires NFS-safe review before inclusion."
+
+[[blocker]]
+kind = "assets"
+message = "No binary demo asset is approved for Phase 2."

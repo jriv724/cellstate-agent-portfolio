@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "case_id": "abundance_standard_v1", "capability_id": "CAP-COMP-001",
+      "input_paths": ["inputs/abundance.csv"], "dataset_signature": "repro-abundance-v1",
+      "expected_status": "completed_with_warnings", "expected_warning_codes": ["DUPLICATE_METADATA_ROWS"],
+      "expected_artifacts": [
+        {"logical_name": "sample_table", "actual_filename": "sample_level_cell_type_fractions.csv", "expected_path": "expected/CAP-COMP-001/sample_level_cell_type_fractions.csv"},
+        {"logical_name": "stage_summary", "actual_filename": "cell_type_stage_fraction_summary.csv", "expected_path": "expected/CAP-COMP-001/cell_type_stage_fraction_summary.csv"}
+      ]
+    },
+    {
+      "case_id": "paired_progression_v1", "capability_id": "CAP-STAT-003",
+      "input_paths": ["inputs/paired_progression.tsv"], "dataset_signature": "repro-paired-v1",
+      "expected_status": "completed", "expected_artifacts": [
+        {"logical_name": "analysis_set", "actual_filename": "analysis_set.csv", "expected_path": "expected/CAP-STAT-003/analysis_set.csv"},
+        {"logical_name": "patient_stage_means", "actual_filename": "patient_stage_means.csv", "expected_path": "expected/CAP-STAT-003/patient_stage_means.csv"},
+        {"logical_name": "paired_deltas", "actual_filename": "paired_deltas.csv", "expected_path": "expected/CAP-STAT-003/paired_deltas.csv"},
+        {"logical_name": "paired_tests", "actual_filename": "paired_wilcoxon_t_bh.csv", "expected_path": "expected/CAP-STAT-003/paired_wilcoxon_t_bh.csv"}
+      ]
+    },
+    {
+      "case_id": "deseq2_external_runtime_blocker_v1", "capability_id": "CAP-DESEQ-002",
+      "input_paths": ["inputs/deseq2_counts.csv", "inputs/deseq2_metadata.csv"],
+      "dataset_signature": "repro-deseq2-blocker-v1", "expected_status": "failed_execution",
+      "expected_warning_codes": ["DESEQ2_RUNTIME_FAILURE"], "expected_artifacts": []
+    }
+  ]
+}

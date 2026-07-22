@@ -1,0 +1,17 @@
+sample	patient	dataset	class	stage	age
+p0-n	p0	d1	B	NDMM	40
+p0-r	p0	d1	B	RRMM	41
+p1-n	p1	d1	B	NDMM	41
+p1-r	p1	d1	B	RRMM	43
+p2-n	p2	d1	B	NDMM	42
+p2-r	p2	d1	B	RRMM	45
+p3-n	p3	d1	B	NDMM	43
+p3-r	p3	d1	B	RRMM	47
+p0-n	p0	d1	T	NDMM	50
+p0-r	p0	d1	T	RRMM	51
+p1-n	p1	d1	T	NDMM	51
+p1-r	p1	d1	T	RRMM	53
+p2-n	p2	d1	T	NDMM	52
+p2-r	p2	d1	T	RRMM	55
+p3-n	p3	d1	T	NDMM	53
+p3-r	p3	d1	T	RRMM	57

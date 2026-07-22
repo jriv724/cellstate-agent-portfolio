@@ -1,0 +1,56 @@
+"""Machine-readable specifications for implemented capabilities (not a registry)."""
+from .schemas.common import CapabilitySpec, ResourceRequirements
+
+_PY = ResourceRequirements(cpu_cores=1, memory_gb=2.0)
+_R = ResourceRequirements(cpu_cores=1, memory_gb=4.0, requires_r=True,
+                          external_packages=("DESeq2", "apeglm (optional)"))
+
+CAPABILITY_SPECS = (
+    CapabilitySpec("CAP-COMP-001", "Cell-state abundance", "What are sample-level cell-state fractions across disease stages?", "composition",
+        "cellstate.schemas.abundance.AbundanceInput", "cellstate.schemas.abundance.AbundanceOutput", "biological_sample",
+        ("sample", "dataset", "stage_model_v2", "preserved"), ("cell_metadata_table",), False, True, "cell_state", _PY),
+    CapabilitySpec("CAP-STAT-001", "Immune-age group comparison", "Do predicted immune-age outcomes differ across disease or response groups?", "nonparametric_group_test",
+        "cellstate.schemas.age_association.GroupAgeAssociationInput", "cellstate.schemas.age_association.AgeAssociationOutput", "biological_sample",
+        ("sample", "cell_type", "mean_bm_retrained_age", "stage_model"), ("sample_table",), True, False, "immune_class", _PY),
+    CapabilitySpec("CAP-STAT-002", "Ordered immune-age association", "Do predicted immune-age outcomes follow an ordered disease-group trend?", "ordered_association",
+        "cellstate.schemas.age_association.OrderedAgeAssociationInput", "cellstate.schemas.age_association.AgeAssociationOutput", "biological_sample",
+        ("patient_id", "cell_type", "mean_bm_retrained_age", "response_group"), ("sample_table",), True, False, "immune_class", _PY),
+    CapabilitySpec("CAP-COMP-002", "Cross-sectional disease progression", "How does a sample-level outcome vary across ordered disease stages?", "progression",
+        "cellstate.schemas.progression.CrossSectionalProgressionInput", "cellstate.schemas.progression.ProgressionOutput", "biological_sample",
+        ("sample", "dataset", "stage_model_v2", "preserved", "fraction"), ("sample_table",), True, False, "outcome", _PY),
+    CapabilitySpec("CAP-STAT-003", "Paired NDMM to RRMM progression", "How does an outcome change within patients from NDMM to RRMM?", "paired_progression",
+        "cellstate.schemas.progression.PairedProgressionInput", "cellstate.schemas.progression.ProgressionOutput", "patient",
+        ("sample", "patient_id", "cell_type", "stage_model", "mean_bm_retrained_age"), ("sample_table",), True, False, "outcome", _PY),
+    CapabilitySpec("CAP-STAT-004", "Longitudinal treatment kinetics", "How does an outcome change within patients across ordered treatment timepoints?", "longitudinal",
+        "cellstate.schemas.progression.LongitudinalKineticsInput", "cellstate.schemas.progression.ProgressionOutput", "patient",
+        ("patient_id", "cell_type", "timepoint", "mean_bm_retrained_age"), ("sample_table",), True, False, "outcome", _PY),
+    CapabilitySpec("CAP-DESEQ-001", "Raw-count pseudobulk construction", "What raw integer gene counts aggregate within sample and cell state?", "pseudobulk_construction",
+        "cellstate.schemas.pseudobulk_de.PseudobulkInput", "cellstate.schemas.pseudobulk_de.PseudobulkOutput", "biological_sample",
+        ("cell_id", "sample", "dataset", "stage_model_v2", "preserved"), ("raw_integer_cell_counts", "cell_metadata_table"), False, False, "cell_state", _PY),
+    CapabilitySpec("CAP-DESEQ-002", "DESeq2 differential expression", "Which genes differ in SMM or NDMM versus NBM within a cell state?", "differential_expression",
+        "cellstate.schemas.deseq2.DifferentialExpressionInput", "cellstate.schemas.deseq2.DifferentialExpressionOutput", "biological_sample",
+        ("sample", "dataset", "stage_model_v2", "cell_state"), ("raw_integer_pseudobulk_counts", "sample_metadata_table"), True, False, "cell_state", _R,
+        ("CAP-DESEQ-001",)),
+    CapabilitySpec("CAP-DESEQ-003", "Arbitrary Two-Group Pseudobulk Differential Expression",
+        "Which genes differ between two caller-ordered biological groups within one cell state?",
+        "two_group_differential_expression",
+        "cellstate.schemas.arbitrary_two_group_de.ArbitraryTwoGroupDEInput",
+        "cellstate.schemas.arbitrary_two_group_de.ArbitraryTwoGroupDEOutput",
+        "independent_biological_pseudobulk_replicate",
+        ("sample", "group", "dataset", "n_cells"),
+        ("raw_integer_pseudobulk_counts", "sample_metadata_table"),
+        True, False, "cell_state", _R, ("CAP-DESEQ-001",)),
+    CapabilitySpec("CAP-LODO-001", "Atlas-scale leave-one-dataset-out remodeling", "Which group-associated transcriptional effects reproduce when each dataset is held out?", "leave_one_dataset_out_ols",
+        "cellstate.schemas.atlas_lodo.AtlasLODOInput", "cellstate.schemas.atlas_lodo.AtlasLODOOutput", "biological_sample",
+        ("sample", "dataset", "stage_model_v2", "preserved"), ("anndata_mean_expression", "cell_expression_table", "sample_mean_expression_table"), True, False, "cell_state", ResourceRequirements(cpu_cores=1, memory_gb=8.0)),
+    CapabilitySpec("CAP-TF-001", "Consensus TF Regulatory Network", "Which transcription factors have consensus regulon support for an explicit feature program?", "tf_target_overrepresentation",
+        "cellstate.schemas.tf_regulatory_network.TFRegulatoryNetworkInput", "cellstate.schemas.tf_regulatory_network.TFRegulatoryNetworkOutput", "feature_program",
+        ("program_id", "feature_set_id", "feature_id", "cell_state", "condition_a", "condition_b", "contrast", "contrast_direction", "feature_direction"),
+        ("validated_feature_program_table", "explicit_background_universe", "local_regulon_tables"), True, False, "feature_program", ResourceRequirements(cpu_cores=1, memory_gb=4.0)),
+    CapabilitySpec("CAP-TF-002", "Signed TF Activity Inference", "Does a complete signed gene-level pattern support increased or decreased transcription-factor activity?", "signed_univariate_linear_model",
+        "cellstate.schemas.tf_activity.TFActivityInput", "cellstate.schemas.tf_activity.TFActivityOutput", "resource_x_feature_program_x_tf",
+        ("program_id", "feature_set_id", "feature_id", "cell_state", "condition_a", "condition_b", "contrast", "contrast_direction", "signed_statistic", "signed_statistic_name", "statistic_orientation"),
+        ("complete_signed_gene_statistic_table", "local_signed_regulon_tables"), True, False, "feature_program", ResourceRequirements(cpu_cores=1, memory_gb=4.0)),
+)
+
+CAPABILITY_SPECS_BY_ID = {spec.capability_id: spec for spec in CAPABILITY_SPECS}

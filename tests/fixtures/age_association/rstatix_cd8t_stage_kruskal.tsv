@@ -1,0 +1,2 @@
+.y.	n	statistic	df	p	method
+mean_pbmc_cd8t_age	633	14.457310886007	4	0.00597	Kruskal-Wallis

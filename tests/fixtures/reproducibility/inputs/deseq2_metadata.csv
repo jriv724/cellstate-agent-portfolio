@@ -1,0 +1,10 @@
+sample,dataset,stage_model_v2,cell_state
+NBM0,d1,NBM,B
+NBM1,d2,NBM,B
+NBM2,d1,NBM,B
+SMM0,d1,SMM,B
+SMM1,d2,SMM,B
+SMM2,d1,SMM,B
+NDMM0,d1,NDMM,B
+NDMM1,d2,NDMM,B
+NDMM2,d1,NDMM,B

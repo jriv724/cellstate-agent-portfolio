@@ -1,0 +1,13 @@
+sample,stage_model_v2,dataset,patient,preserved,n_cells,sample_total,fraction
+n1,NBM,d1,p-n1,B,2,4,0.5
+n1,NBM,d1,p-n1,Plasma,1,4,0.25
+n1,NBM,d1,p-n1,T,1,4,0.25
+n2,NBM,d2,p-n2,B,1,4,0.25
+n2,NBM,d2,p-n2,Plasma,0,4,0.0
+n2,NBM,d2,p-n2,T,3,4,0.75
+s1,SMM,d1,p-s1,B,3,4,0.75
+s1,SMM,d1,p-s1,Plasma,0,4,0.0
+s1,SMM,d1,p-s1,T,1,4,0.25
+s2,SMM,d2,p-s2,B,1,4,0.25
+s2,SMM,d2,p-s2,Plasma,2,4,0.5
+s2,SMM,d2,p-s2,T,1,4,0.25
