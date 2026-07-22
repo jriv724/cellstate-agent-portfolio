@@ -4,6 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="CellState Agent — auditable immune-atlas analysis.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CellState Agent — Scientific Demo">
+  <meta property="og:description" content="Auditable agentic analysis over a 3.04-million-cell immune atlas.">
+  <meta property="og:url" content="https://jriv724.github.io/cellstate-agent-portfolio/">
+  <meta property="og:image" content="https://jriv724.github.io/cellstate-agent-portfolio/assets/cellstate-agent-architecture.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#35164e">
   <title>CellState Agent — Scientific Demo</title>
   <style>
     :root {
@@ -85,6 +92,41 @@
       background:rgba(255,255,255,.68);border-radius:0 14px 14px 0;
       color:#44394b;font-weight:650
     }
+    .hero-actions{
+      margin-top:24px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+    }
+    .hero-report-link,
+    .hero-demo-link{
+      display:inline-flex;
+      min-height:52px;
+      align-items:center;
+      justify-content:center;
+      padding:0 24px;
+      border-radius:999px;
+      font-size:.92rem;
+      font-weight:850;
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .hero-report-link{
+      color:white;
+      background:linear-gradient(135deg,var(--purple),var(--plum));
+      box-shadow:0 14px 30px rgba(91,44,131,.24);
+    }
+    .hero-report-link:hover{
+      transform:translateY(-2px);
+      box-shadow:0 18px 36px rgba(91,44,131,.32);
+    }
+    .hero-demo-link{
+      color:var(--purple);
+      background:white;
+      border:1px solid rgba(91,44,131,.22);
+    }
+    .hero-demo-link:hover{transform:translateY(-2px)}
+
     .hero-panel{
       background:white;border:1px solid var(--line);border-radius:28px;padding:26px;
       box-shadow:var(--shadow)
@@ -396,7 +438,7 @@
     .contrib-item strong{display:block;margin-bottom:4px}
     .contrib-item span{font-size:.87rem;color:rgba(255,255,255,.70)}
 
-    .why-sanofi{
+    .scientific-value-section{
       padding:112px 0;
       color:white;
       background:
@@ -406,7 +448,7 @@
       position:relative;
       overflow:hidden;
     }
-    .why-sanofi:before{
+    .scientific-value-section:before{
       content:"";
       position:absolute;
       width:560px;
@@ -419,24 +461,24 @@
         0 0 0 72px rgba(255,255,255,.025),
         0 0 0 144px rgba(255,255,255,.016);
     }
-    .why-sanofi-inner{
+    .scientific-value-section-inner{
       position:relative;
       z-index:2;
     }
-    .why-sanofi .eyebrow{
+    .scientific-value-section .eyebrow{
       color:#e4cff7;
     }
-    .why-sanofi-head{
+    .scientific-value-section-head{
       max-width:1000px;
     }
-    .why-sanofi h2{
+    .scientific-value-section h2{
       margin:0;
       font-size:clamp(2.8rem,6vw,5.9rem);
       line-height:.96;
       letter-spacing:-.065em;
       max-width:1050px;
     }
-    .why-sanofi-lede{
+    .scientific-value-section-lede{
       max-width:850px;
       margin:26px 0 0;
       color:rgba(255,255,255,.74);
@@ -542,6 +584,8 @@
         <a href="#workflow">Workflow</a>
         <a href="#contribute">Contribute</a>
         <a href="#scientific-value">Philosophy</a>
+        <a href="https://github.com/jriv724/cellstate-agent-portfolio"
+           target="_blank" rel="noreferrer">GitHub</a>
       </nav>
     </div>
   </header>
@@ -557,6 +601,17 @@
           </p>
           <div class="hero-rule">
             The atlas is the source of truth. AI agents help organize and set up analysis built on replication, estimability, robustness, and provenance.
+          </div>
+          <div class="hero-actions">
+            <a class="hero-report-link"
+               href="assets/cellstate_agent_scientific_report.pdf"
+               target="_blank"
+               rel="noreferrer">
+              Read the scientific report (PDF)
+            </a>
+            <a class="hero-demo-link" href="#demo">
+              Watch the analysis demo
+            </a>
           </div>
         </div>
         <aside class="hero-panel">
@@ -663,7 +718,7 @@
             </p>
 
             <p>
-              Results enter an EvidenceBundle with warnings, provenance, and artifacts. The OpenAI critic and interpreter review the evidence after analysis and cannot alter the statistics.
+              Results enter an EvidenceBundle with warnings, provenance, and artifacts. The OpenAI critic reviews the evidence first; the interpreter then receives the validated CriticReport. Neither stage can alter the statistics.
             </p>
 
             <div class="system-principle">
@@ -871,12 +926,12 @@
       </div>
     </section>
 
-    <section id="scientific-value" class="why-sanofi">
-      <div class="wrap why-sanofi-inner">
-        <div class="why-sanofi-head">
+    <section id="scientific-value" class="scientific-value-section">
+      <div class="wrap scientific-value-section-inner">
+        <div class="scientific-value-section-head">
           <p class="eyebrow">The larger idea</p>
           <h2>Reuse the science without weakening it.</h2>
-          <p class="why-sanofi-lede">
+          <p class="scientific-value-section-lede">
             Strong analyses should not end as one-off notebooks. Their assumptions, checks, outputs, and limits should carry forward.
           </p>
         </div>
@@ -918,7 +973,7 @@
         <div class="final-thesis">
           <small>Core thesis</small>
           <p>
-            The value is to automate cannonical workflows while preserving the scientific rigor and interpretability of the analysis - <bold>Accelerating Discovery</bold>.
+            The value is to automate canonical workflows while preserving scientific rigor and interpretability—<strong>accelerating discovery</strong>.
           </p>
         </div>
       </div>
@@ -935,6 +990,10 @@
         <strong>Joshua Rivera, Ph.D.</strong><br>
         Dana-Farber Cancer Institute<br>
         Harvard Medical School
+        <div style="margin-top:8px;max-width:560px">
+          Personal research-software demonstration; not an official product of
+          Dana-Farber Cancer Institute or Harvard Medical School.
+        </div>
       </div>
     </div>
   </footer>

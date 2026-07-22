@@ -1,5 +1,25 @@
 # CellState Agent
 
+
+<!-- live-demo -->
+<p align="center">
+  <a href="https://jriv724.github.io/cellstate-agent-portfolio/">
+    <strong>Launch the CellState Agent Science Demo →</strong>
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://jriv724.github.io/cellstate-agent-portfolio/">
+    <img src="docs/assets/cellstate-agent-architecture.png"
+         alt="CellState Agent architecture"
+         width="900">
+  </a>
+</p>
+
+> Explore the live workflow, capability map, scientific results, figures, videos, and public scientific report.
+<!-- /live-demo -->
+
+
 CellState Agent is a research prototype for turning natural-language computational-biology questions into auditable, approval-gated scientific analyses.
 
 ## Auditable workflow
