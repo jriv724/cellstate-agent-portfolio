@@ -2,17 +2,17 @@
 
 
 <!-- live-demo -->
-<p align="center">
+<h2 align="center">
   <a href="https://jriv724.github.io/cellstate-agent-portfolio/">
-    <strong>Launch the CellState Agent Science Demo →</strong>
+    Launch the CellState Agent Science Demo →
   </a>
-</p>
+</h2>
 
 <p align="center">
   <a href="https://jriv724.github.io/cellstate-agent-portfolio/">
     <img src="docs/assets/architecture_graphic.jpg"
          alt="CellState Agent architecture from question to scientific report"
-         width="600">
+         width="440">
   </a>
 </p>
 
