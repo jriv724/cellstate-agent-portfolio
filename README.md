@@ -10,9 +10,9 @@
 
 <p align="center">
   <a href="https://jriv724.github.io/cellstate-agent-portfolio/">
-    <img src="docs/assets/cellstate-agent-architecture.png"
-         alt="CellState Agent architecture"
-         width="900">
+    <img src="docs/assets/architecture_graphic.jpg"
+         alt="CellState Agent architecture from question to scientific report"
+         width="600">
   </a>
 </p>
 
