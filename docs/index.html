@@ -1,0 +1,943 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CellState Agent — auditable immune-atlas analysis.">
+  <title>CellState Agent — Scientific Demo</title>
+  <style>
+    :root {
+      --ink:#181320;
+      --muted:#685f72;
+      --paper:#fbf9fc;
+      --white:#ffffff;
+      --purple:#5b2c83;
+      --purple-2:#7b2cbf;
+      --plum:#35164e;
+      --lavender:#eee5f6;
+      --line:rgba(53,22,78,.14);
+      --green:#277a58;
+      --green-bg:#e7f3ed;
+      --amber:#946200;
+      --amber-bg:#fff2cf;
+      --shadow:0 22px 60px rgba(53,22,78,.11);
+      --max:1200px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at 95% 0%,rgba(123,44,191,.11),transparent 28rem),
+        var(--paper);
+      color:var(--ink);
+      font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      line-height:1.55;
+    }
+    img,video{display:block;max-width:100%}
+    a{color:inherit;text-decoration:none}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    .wrap{width:min(calc(100% - 40px),var(--max));margin:0 auto}
+    .eyebrow{
+      margin:0 0 12px;
+      color:var(--purple);
+      font-size:.75rem;
+      font-weight:850;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+    }
+    .site-header{
+      position:sticky;top:0;z-index:30;
+      background:rgba(251,249,252,.88);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(53,22,78,.08);
+    }
+    .nav{
+      min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:22px
+    }
+    .brand{display:flex;align-items:center;gap:13px}
+    .mark{
+      width:38px;height:38px;border-radius:13px;display:grid;place-items:center;
+      color:white;background:linear-gradient(145deg,var(--plum),var(--purple-2));
+      box-shadow:0 9px 24px rgba(91,44,131,.23);
+      font-weight:900;
+    }
+    .brand strong{display:block;letter-spacing:-.025em}
+    .brand small{display:block;color:var(--muted);font-weight:650}
+    .nav-links{display:flex;gap:22px;font-size:.86rem;font-weight:750;color:#44394c}
+    .nav-links a:hover{color:var(--purple-2)}
+    .hero{padding:78px 0 52px}
+    .hero-grid{display:grid;grid-template-columns:1.03fr .97fr;gap:64px;align-items:center}
+    .hero h1{
+      margin:0;
+      font-size:clamp(3rem,6.6vw,6.2rem);
+      line-height:.94;
+      letter-spacing:-.065em;
+      font-weight:830;
+    }
+    .hero h1 span{display:block;color:var(--purple)}
+    .hero-copy{
+      max-width:690px;margin:25px 0 0;color:#4f4657;
+      font-size:clamp(1.04rem,1.6vw,1.25rem)
+    }
+    .hero-rule{
+      margin-top:30px;padding:18px 20px;border-left:4px solid var(--purple);
+      background:rgba(255,255,255,.68);border-radius:0 14px 14px 0;
+      color:#44394b;font-weight:650
+    }
+    .hero-panel{
+      background:white;border:1px solid var(--line);border-radius:28px;padding:26px;
+      box-shadow:var(--shadow)
+    }
+    .hero-panel h2{margin:0;font-size:1.2rem}
+    .hero-panel p{margin:7px 0 18px;color:var(--muted);font-size:.9rem}
+    .hero-metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .metric{
+      padding:18px;border-radius:16px;background:#f5f0f8;border:1px solid rgba(91,44,131,.08)
+    }
+    .metric strong{display:block;font-size:1.55rem;letter-spacing:-.04em}
+    .metric span{font-size:.78rem;color:var(--muted);font-weight:720}
+    section{padding:92px 0}
+    .section-head{max-width:850px;margin-bottom:42px}
+    .section-head h2{
+      margin:0;font-size:clamp(2.25rem,5vw,4.6rem);line-height:.99;letter-spacing:-.055em
+    }
+    .section-head p:not(.eyebrow){margin:20px 0 0;color:var(--muted);font-size:1.04rem}
+    .atlas-top{
+      padding-top:72px;
+      background:linear-gradient(180deg,#f4eef8 0%,#fbf9fc 100%)
+    }
+    .atlas-showcase{display:grid;gap:26px}
+    .atlas-primary{padding:18px}
+    .atlas-primary .figure-caption{max-width:900px}
+    .atlas-secondary-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start
+    }
+    .atlas-secondary-grid .figure-card{
+      display:flex;flex-direction:column;height:100%
+    }
+    .atlas-secondary-grid .figure-caption{margin-top:auto}
+    .atlas-secondary-grid img{width:100%}
+    .figure-card{
+      background:white;border:1px solid var(--line);border-radius:24px;padding:14px;
+      box-shadow:0 14px 38px rgba(53,22,78,.07)
+    }
+    .figure-card img{width:100%;border-radius:15px}
+    .figure-caption{
+      padding:13px 5px 3px;color:var(--muted);font-size:.84rem
+    }
+    .side-stack{display:grid;gap:24px}
+    .science-note{
+      margin-top:24px;padding:24px;border:1px solid rgba(91,44,131,.16);
+      background:rgba(255,255,255,.72);border-radius:20px
+    }
+    .science-note strong{display:block;margin-bottom:6px;font-size:1.02rem}
+    .science-note p{margin:0;color:var(--muted)}
+    .question-section{background:#21152b;color:white;position:relative;overflow:hidden}
+    .question-section:after{
+      content:"";position:absolute;width:480px;height:480px;border-radius:50%;
+      right:-180px;top:-200px;border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 0 0 70px rgba(255,255,255,.025),0 0 0 140px rgba(255,255,255,.018)
+    }
+    .question-section .eyebrow{color:#dfc8f5}
+    .question-grid{display:grid;gap:30px;position:relative;z-index:2}
+    .question-figure{
+      background:white;
+      border-radius:24px;
+      padding:18px;
+      box-shadow:0 20px 50px rgba(0,0,0,.16)
+    }
+    .question-figure img{
+      width:100%;
+      border-radius:14px
+    }
+    .question-copy{
+      max-width:980px
+    }
+    .question-copy h2{
+      margin:0;font-size:clamp(2.4rem,5vw,4.8rem);line-height:.98;letter-spacing:-.06em
+    }
+    .question-copy p{color:rgba(255,255,255,.72)}
+    .hypothesis{
+      margin-top:24px;padding:20px;border-radius:17px;
+      background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.12)
+    }
+    .hypothesis strong{display:block;color:white;margin-bottom:6px}
+    .hypothesis span{color:rgba(255,255,255,.73);font-size:.92rem}
+    .system-philosophy{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:minmax(280px,.78fr) minmax(0,1.22fr);
+      gap:42px;
+      align-items:center;
+      max-width:1120px;
+      margin:46px auto 0;
+      padding:28px;
+      border-radius:26px;
+      color:var(--ink);
+      background:white;
+      box-shadow:0 22px 56px rgba(0,0,0,.18);
+    }
+    .system-philosophy-figure{
+      margin:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-width:0;
+    }
+    .system-philosophy-figure img{
+      width:min(100%,410px);
+      max-height:560px;
+      object-fit:contain;
+      border-radius:16px;
+    }
+    .system-philosophy-copy{
+      min-width:0;
+      padding:8px 12px 8px 0;
+    }
+    .system-philosophy-copy .eyebrow{
+      color:var(--purple);
+    }
+    .system-philosophy-copy h3{
+      margin:0;
+      max-width:650px;
+      font-size:clamp(2rem,4vw,3.55rem);
+      line-height:1;
+      letter-spacing:-.052em;
+    }
+    .system-philosophy-copy p{
+      margin:18px 0 0;
+      color:var(--muted);
+      font-size:.96rem;
+    }
+    .system-principle{
+      margin-top:24px;
+      padding:18px 20px;
+      border-left:4px solid var(--green);
+      border-radius:0 15px 15px 0;
+      background:#edf6f1;
+      color:#254c3a;
+      font-weight:720;
+    }
+        .workflow-stack{display:grid;gap:28px}
+    .workflow-figure{padding:22px}
+    .workflow-figure img{width:100%}
+    .workflow-section .section-head{
+      max-width:760px;
+      margin-bottom:30px
+    }
+    .workflow-section .section-head h2{
+      font-size:clamp(2.05rem,3.9vw,3.7rem)
+    }
+    .workflow-section .section-head p:not(.eyebrow){
+      font-size:.96rem
+    }
+    .steps{display:grid;gap:14px}
+    .workflow-steps{
+      grid-template-columns:repeat(4,1fr);
+      gap:14px
+    }
+    .workflow-steps .step{
+      grid-template-columns:36px 1fr;
+      gap:12px;
+      padding:16px;
+      align-items:start
+    }
+    .workflow-steps .n{
+      width:36px;
+      height:36px;
+      font-size:.84rem
+    }
+    .workflow-steps .step h3{
+      font-size:.92rem
+    }
+    .workflow-steps .step p{
+      font-size:.78rem;
+      line-height:1.48
+    }
+    .step{
+      display:grid;grid-template-columns:42px 1fr;gap:15px;padding:19px;
+      background:white;border:1px solid var(--line);border-radius:17px
+    }
+    .n{
+      width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:white;
+      background:linear-gradient(145deg,var(--plum),var(--purple-2));font-weight:850
+    }
+    .step h3{margin:0 0 4px;font-size:1rem}
+    .step p{margin:0;color:var(--muted);font-size:.89rem}
+    .science-pill{
+      display:inline-flex;padding:6px 10px;border-radius:999px;font-size:.72rem;font-weight:820;
+      color:var(--green);background:var(--green-bg);margin-bottom:12px
+    }
+
+    .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .cap{
+      background:white;border:1px solid var(--line);border-radius:20px;padding:23px;min-height:200px
+    }
+    .cap h3{margin:16px 0 8px;font-size:1.12rem}
+    .cap p{margin:0;color:var(--muted);font-size:.88rem}
+    .cap code{display:block;margin-top:18px;color:#8b8192;font-size:.72rem;font-weight:750}
+    .status{
+      display:inline-flex;padding:6px 10px;border-radius:999px;font-size:.71rem;font-weight:820
+    }
+    .ready{color:var(--green);background:var(--green-bg)}
+    .config{color:var(--amber);background:var(--amber-bg)}
+    .dev{color:var(--purple);background:var(--lavender)}
+    .demo-section{background:#f2edf6}
+    .demo-series{display:grid;gap:28px}
+    .demo-chapter{
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:white;
+      box-shadow:0 16px 42px rgba(53,22,78,.07);
+    }
+    .demo-chapter-head{
+      display:grid;
+      grid-template-columns:52px 1fr;
+      gap:18px;
+      padding:24px 26px 20px;
+      align-items:start;
+    }
+    .demo-index{
+      width:52px;
+      height:52px;
+      display:grid;
+      place-items:center;
+      border-radius:16px;
+      color:white;
+      background:linear-gradient(145deg,var(--plum),var(--purple-2));
+      font-weight:900;
+    }
+    .demo-chapter h3{
+      margin:0 0 7px;
+      font-size:1.25rem;
+      letter-spacing:-.025em;
+    }
+    .demo-chapter p{
+      margin:0;
+      max-width:900px;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+    .demo-video-shell{
+      padding:0 18px 18px;
+    }
+    .demo-video-shell video{
+      width:100%;
+      border-radius:16px;
+      background:#100c14;
+      border:1px solid rgba(53,22,78,.12);
+    }
+    .demo-note{
+      margin-top:12px;
+      color:#817687;
+      font-size:.75rem;
+    }
+    .report-panel{
+      margin-top:28px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:28px;
+      align-items:center;
+      padding:28px;
+      border-radius:22px;
+      color:white;
+      background:linear-gradient(140deg,var(--plum),#5a2a7c);
+    }
+    .report-panel h3{
+      margin:0 0 8px;
+      font-size:1.3rem;
+    }
+    .report-panel p{
+      margin:0;
+      max-width:760px;
+      color:rgba(255,255,255,.72);
+      font-size:.9rem;
+    }
+    .report-link{
+      display:inline-flex;
+      min-height:46px;
+      align-items:center;
+      justify-content:center;
+      padding:0 19px;
+      border-radius:999px;
+      background:white;
+      color:var(--purple);
+      font-size:.86rem;
+      font-weight:850;
+      white-space:nowrap;
+    }
+    .report-link:hover{transform:translateY(-1px)}
+    .interpretation-grid{display:grid;grid-template-columns:1fr 1fr;gap:42px;align-items:center}
+    .interpretation-copy h2{
+      margin:0;font-size:clamp(2.3rem,5vw,4.5rem);line-height:.99;letter-spacing:-.055em
+    }
+    .interpretation-copy p{color:var(--muted)}
+    .principles{
+      margin-top:24px;display:grid;gap:10px
+    }
+    .principles div{
+      padding:14px 16px;border-radius:14px;background:white;border:1px solid var(--line);
+      color:#4b4052;font-size:.9rem
+    }
+    .contribute{background:linear-gradient(140deg,var(--plum),var(--purple-2));color:white}
+    .contribute-grid{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:start}
+    .contribute h2{
+      margin:0;font-size:clamp(2.4rem,5vw,4.8rem);line-height:.98;letter-spacing:-.06em
+    }
+    .contribute p{color:rgba(255,255,255,.74)}
+    .contrib-list{display:grid;gap:13px}
+    .contrib-item{
+      padding:18px;border-radius:16px;border:1px solid rgba(255,255,255,.13);
+      background:rgba(255,255,255,.07)
+    }
+    .contrib-item strong{display:block;margin-bottom:4px}
+    .contrib-item span{font-size:.87rem;color:rgba(255,255,255,.70)}
+
+    .why-sanofi{
+      padding:112px 0;
+      color:white;
+      background:
+        radial-gradient(circle at 92% 8%,rgba(255,255,255,.12),transparent 23rem),
+        radial-gradient(circle at 5% 90%,rgba(157,78,221,.22),transparent 28rem),
+        linear-gradient(145deg,#21142d 0%,#3d1c55 54%,#642b8a 100%);
+      position:relative;
+      overflow:hidden;
+    }
+    .why-sanofi:before{
+      content:"";
+      position:absolute;
+      width:560px;
+      height:560px;
+      border-radius:50%;
+      right:-270px;
+      bottom:-300px;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:
+        0 0 0 72px rgba(255,255,255,.025),
+        0 0 0 144px rgba(255,255,255,.016);
+    }
+    .why-sanofi-inner{
+      position:relative;
+      z-index:2;
+    }
+    .why-sanofi .eyebrow{
+      color:#e4cff7;
+    }
+    .why-sanofi-head{
+      max-width:1000px;
+    }
+    .why-sanofi h2{
+      margin:0;
+      font-size:clamp(2.8rem,6vw,5.9rem);
+      line-height:.96;
+      letter-spacing:-.065em;
+      max-width:1050px;
+    }
+    .why-sanofi-lede{
+      max-width:850px;
+      margin:26px 0 0;
+      color:rgba(255,255,255,.74);
+      font-size:1.08rem;
+    }
+    .impact-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+      margin-top:44px;
+    }
+    .impact-card{
+      min-height:218px;
+      padding:23px;
+      border-radius:19px;
+      background:rgba(255,255,255,.072);
+      border:1px solid rgba(255,255,255,.13);
+      backdrop-filter:blur(9px);
+    }
+    .impact-number{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      display:grid;
+      place-items:center;
+      margin-bottom:20px;
+      color:#2b1737;
+      background:white;
+      font-size:.8rem;
+      font-weight:900;
+    }
+    .impact-card h3{
+      margin:0 0 8px;
+      font-size:1.02rem;
+    }
+    .impact-card p{
+      margin:0;
+      color:rgba(255,255,255,.69);
+      font-size:.86rem;
+    }
+    .final-thesis{
+      margin-top:54px;
+      padding:29px 31px;
+      border-radius:20px;
+      background:white;
+      color:var(--ink);
+      box-shadow:0 20px 45px rgba(0,0,0,.18);
+    }
+    .final-thesis small{
+      display:block;
+      margin-bottom:8px;
+      color:var(--purple);
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+    }
+    .final-thesis p{
+      margin:0;
+      font-size:clamp(1.45rem,3vw,2.55rem);
+      line-height:1.12;
+      letter-spacing:-.04em;
+      font-weight:770;
+    }
+
+    footer{padding:34px 0 48px;color:var(--muted);font-size:.79rem}
+    .footer-grid{display:flex;justify-content:space-between;gap:24px;align-items:flex-end}
+    @media(max-width:920px){
+      .nav-links{display:none}
+      .hero-grid,.interpretation-grid,.contribute-grid{grid-template-columns:1fr}
+      .atlas-secondary-grid{grid-template-columns:1fr}
+      .system-philosophy{grid-template-columns:1fr;max-width:760px}
+      .system-philosophy-copy{padding:0 4px 4px}
+      .workflow-steps{grid-template-columns:1fr 1fr}
+      .impact-grid{grid-template-columns:1fr 1fr}
+      .report-panel{grid-template-columns:1fr}
+      .cap-grid{grid-template-columns:1fr}
+      .side-stack{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:620px){
+      .wrap{width:min(calc(100% - 24px),var(--max))}
+      .hero{padding-top:50px}
+      section{padding:72px 0}
+      .side-stack{grid-template-columns:1fr}
+      .workflow-steps{grid-template-columns:1fr}
+      .impact-grid{grid-template-columns:1fr}
+      .hero-metrics{grid-template-columns:1fr}
+      .footer-grid{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="#top">
+        <span class="mark">C</span>
+        <span><strong>CellState Agent</strong><small>Auditable immune-atlas analysis</small></span>
+      </a>
+      <nav class="nav-links">
+        <a href="#atlas">Atlas</a>
+        <a href="#question">Scientific question</a>
+        <a href="#demo">Demo</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#contribute">Contribute</a>
+        <a href="#scientific-value">Philosophy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Research software</p>
+          <h1>CellState Agent<span>Auditable analysis over a 3.04M-cell immune atlas.</span></h1>
+          <p class="hero-copy">
+            A LangGraph system that turns biological questions into reviewable analysis plans. Deterministic nodes run the science; language models plan, critique, and interpret.
+          </p>
+          <div class="hero-rule">
+            The atlas is the source of truth. AI agents help organize and set up analysis built on replication, estimability, robustness, and provenance.
+          </div>
+        </div>
+        <aside class="hero-panel">
+          <h2>Current atlas</h2>
+          <p>Bone marrow and immune datasets across normal, precursor, diagnosed, relapsed, and remission states.</p>
+          <div class="hero-metrics">
+            <div class="metric"><strong>3,041,619</strong><span>single cells</span></div>
+            <div class="metric"><strong>15,412</strong><span>genes</span></div>
+            <div class="metric"><strong>53</strong><span>curated cell states</span></div>
+            <div class="metric"><strong>7</strong><span>disease-stage groups</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="atlas" class="atlas-top">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Start with the data</p>
+          <h2>Grounded in a multi-cohort bone marrow immune atlas with myeloma disease progression.</h2>
+          <p>
+            Before testing a contrast, the system checks the available data, cell-state definitions, cohort structure, and biological replication.
+          </p>
+        </div>
+
+        <div class="atlas-showcase">
+          <figure class="figure-card atlas-primary">
+            <img src="assets/disease-stage-clustering.png" alt="Disease-stage UMAPs showing normal bone marrow, MGUS, smoldering myeloma, newly diagnosed myeloma, relapsed or refractory myeloma, and remission.">
+            <figcaption class="figure-caption">
+              Integrated disease-stage structure used for downstream comparisons. Canonical group IDs are preserved for analysis and provenance.
+            </figcaption>
+          </figure>
+
+          <div class="atlas-secondary-grid">
+            <figure class="figure-card">
+              <img src="assets/cell-type-atlas.png" alt="UMAP of all mapped immune, hematopoietic, and stromal cell types in the atlas.">
+              <figcaption class="figure-caption">
+                Fifty-three curated immune, hematopoietic, and stromal states define the planner's cell-state vocabulary.
+              </figcaption>
+            </figure>
+
+            <figure class="figure-card">
+              <img src="assets/dataset-composition.png" alt="UMAP showing dataset composition across the integrated atlas.">
+              <figcaption class="figure-caption">
+                Dataset labels remain explicit so cohort-stage confounding can be tested.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="science-note">
+          <strong>Why this contrast matters</strong>
+          <p>
+            Normal Bone Marrow versus Newly Diagnosed Multiple Myeloma is a multi-cohort contrast. Replicates, dataset structure, cell thresholds, and cross-dataset stability must be checked first.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="question" class="question-section">
+      <div class="wrap question-grid">
+        <figure class="question-figure">
+          <img src="assets/lodo-cell-state-screen.png" alt="Increasing and decreasing cell-state proportions across disease stages, highlighting GZMB CD8 T cells among increasing populations.">
+        </figure>
+
+        <div class="question-copy">
+          <p class="eyebrow">Scientific question</p>
+          <h2>Why examine GZMB CD8 T cells?</h2>
+          <p>
+            GZMB CD8 T cells increase across the myeloma spectrum, motivating a replicate-aware analysis of their transcriptional state.
+          </p>
+
+          <div class="hypothesis">
+            <strong>  AI AGENT PROMPT</strong>
+            <strong>Biological question</strong>
+            <span>
+              Which GZMB CD8 T-cell programs distinguish Normal Bone Marrow from Newly Diagnosed Multiple Myeloma, remain stable across datasets, and support reproducible TF activity?
+            </span>
+          </div>
+        </div>
+
+        <div class="system-philosophy">
+          <figure class="system-philosophy-figure">
+            <img
+              src="assets/architecture_graphic.jpg"
+              alt="CellState Agent architecture showing LangGraph and Gemini orchestration, a protected deterministic capability network, EvidenceBundle generation, OpenAI critic and interpreter reasoning, and scientific report output."
+              width="1086"
+              height="1448"
+              decoding="async"
+              loading="lazy"
+            >
+          </figure>
+
+          <div class="system-philosophy-copy">
+            <p class="eyebrow">How the system works</p>
+            <h3>The agent coordinates. Deterministic methods analyze.</h3>
+
+            <p>
+              Gemini builds a typed plan. The system exposes the contrast, replicates, estimability, confounding, thresholds, and requested capabilities. LangGraph executes only after approval.
+            </p>
+
+            <p>
+              DE, LODO, TF activity, networks, abundance, progression, immune age, and QC run as fixed functions. The agent selects valid combinations; it does not rewrite the methods.
+            </p>
+
+            <p>
+              Results enter an EvidenceBundle with warnings, provenance, and artifacts. The OpenAI critic and interpreter review the evidence after analysis and cannot alter the statistics.
+            </p>
+
+            <div class="system-principle">
+              The atlas is the source of truth. Agents coordinate validated work around it.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo" class="demo-section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Recorded demo</p>
+          <h2>CODING DEMO</h2>
+          <p>
+            Three short clips show capability discovery, approved execution, and report review.
+          </p>
+        </div>
+
+        <div class="demo-series">
+          <article class="demo-chapter">
+            <div class="demo-chapter-head">
+              <span class="demo-index">01</span>
+              <div>
+                <h3>Capabilities and readiness</h3>
+                <p>
+                  Available workflows, required inputs, and readiness before execution.
+                </p>
+              </div>
+            </div>
+            <div class="demo-video-shell">
+              <video controls playsinline preload="metadata" poster="assets/01_capabilities_and_options_poster.jpg">
+                <source src="assets/01_capabilities_and_options.mp4" type="video/mp4">
+                Your browser does not support embedded MP4 video.
+              </video>
+            </div>
+          </article>
+
+          <article class="demo-chapter">
+            <div class="demo-chapter-head">
+              <span class="demo-index">02</span>
+              <div>
+                <h3>Question, plan, and live execution</h3>
+                <p>
+                  A natural-language request becomes an approved contrast, design, robustness policy, and capability graph.
+                </p>
+              </div>
+            </div>
+            <div class="demo-video-shell">
+              <video controls playsinline preload="metadata" poster="assets/02_live_analysis_workflow_poster.jpg">
+                <source src="assets/02_live_analysis_workflow.mp4" type="video/mp4">
+                Your browser does not support embedded MP4 video.
+              </video>
+              <div class="demo-note">
+                Waiting periods are accelerated; execution states and elapsed time remain visible.
+              </div>
+            </div>
+          </article>
+
+          <article class="demo-chapter">
+            <div class="demo-chapter-head">
+              <span class="demo-index">03</span>
+              <div>
+                <h3>Results and report</h3>
+                <p>
+                  Review results, caveats, provenance, figures, and the final report.
+                </p>
+              </div>
+            </div>
+            <div class="demo-video-shell">
+              <video controls playsinline preload="metadata" poster="assets/03_results_and_report_poster.jpg">
+                <source src="assets/03_results_and_report.mp4" type="video/mp4">
+                Your browser does not support embedded MP4 video.
+              </video>
+            </div>
+          </article>
+        </div>
+
+        <div class="report-panel">
+          <div>
+            <h3>Open the scientific report</h3>
+            <p>
+              Review the design, results, figures, warnings, and provenance.
+            </p>
+          </div>
+          <a class="report-link"
+             href="assets/cellstate_agent_scientific_report.pdf"
+             target="_blank"
+             rel="noreferrer">
+            Open scientific report (PDF)
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" class="workflow-section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Forward-looking capabilities</p>
+          <h2>The same control plane can support a wider network of validated methods.</h2>
+          <p>
+            Each request becomes an approved typed plan executed through LangGraph.
+          </p>
+        </div>
+
+        <div class="workflow-stack">
+          <figure class="figure-card workflow-figure">
+            <img src="assets/cellstate-agent-architecture.png" alt="Architecture of CellState Agent showing LangGraph control, deterministic evidence branches, regulatory analysis, evidence integration, and an in-development scGPT validation stream.">
+          </figure>
+
+          <div class="steps workflow-steps">
+            <article class="step">
+              <span class="n">1</span>
+              <div>
+                <h3>Question normalization</h3>
+                <p>Resolve the cell state, groups, contrast, capabilities, and intent.</p>
+              </div>
+            </article>
+            <article class="step">
+              <span class="n">2</span>
+              <div>
+                <h3>Contract and approval</h3>
+                <p>Expose replicates, thresholds, estimability, confounding, and stop conditions.</p>
+              </div>
+            </article>
+            <article class="step">
+              <span class="n">3</span>
+              <div>
+                <h3>Deterministic execution</h3>
+                <p>Run pseudobulk DE, LODO testing, and signed TF inference.</p>
+              </div>
+            </article>
+            <article class="step">
+              <span class="n">4</span>
+              <div>
+                <h3>Structured evidence integration</h3>
+                <p>Package results, warnings, and provenance for critique and interpretation.</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="science-note">
+            <strong>Built for a broader agent ecosystem</strong>
+            <p>
+              Generalist agents, internal models, and foundation models can add context or representations. CellState Agent connects them to deterministic execution, provenance, and robustness testing.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Scientific capabilities</p>
+          <h2>Typed, testable methods.</h2>
+          <p>Stable IDs internally; plain language in the interface.</p>
+        </div>
+        <div class="cap-grid">
+          <article class="cap"><span class="status ready">✓ Connected</span><h3>Pseudobulk differential expression</h3><p>Replicate QC, design checks, DESeq2 inference, artifacts, provenance, and caching.</p><code>CAP-DESEQ-003</code></article>
+          <article class="cap"><span class="status config">◐ Configurable</span><h3>Signed TF activity</h3><p>DoRothEA and CollecTRI inference with coverage checks, consensus, and discordance.</p><code>CAP-TF-002</code></article>
+          <article class="cap"><span class="status dev">In development</span><h3>Foundation-model validation</h3><p>scGPT representations and perturbational plausibility as evidence alongside classical inference.</p><code>LEARNED VALIDATION STREAM</code></article>
+        </div>
+      </div>
+    </section>
+
+
+    <section>
+      <div class="wrap interpretation-grid">
+        <figure class="figure-card">
+          <img src="assets/regulatory-network-example.png" alt="Example regulatory network connecting cell states, program genes, and candidate transcription factors.">
+        </figure>
+        <div class="interpretation-copy">
+          <p class="eyebrow">Mechanistic context</p>
+          <h2>From robust signals to testable regulatory hypotheses.</h2>
+          <p>
+            DE and LODO identify stable signals. Signed regulons test TF direction. Networks place regulators in program context.
+          </p>
+          <div class="principles">
+            <div><strong>Association:</strong> reproducible expression across biological replicates.</div>
+            <div><strong>Robustness:</strong> stable direction and effect across LODO analyses.</div>
+            <div><strong>Regulatory inference:</strong> agreement between signed gene statistics and TF-target weights.</div>
+            <div><strong>Mechanistic hypothesis:</strong> a testable model requiring validation.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contribute" class="contribute">
+      <div class="wrap contribute-grid">
+        <div>
+          <p class="eyebrow" style="color:#dfc8f5">Reusable scientific infrastructure</p>
+          <h2>The system improves when trusted methods become reusable.</h2>
+          <p>
+            Encode trusted methods as tested capabilities with explicit contracts, benchmarks, provenance, and limits.
+          </p>
+        </div>
+        <div class="contrib-list">
+          <div class="contrib-item"><strong>Validated methods</strong><span>Deterministic nodes with declared inputs, assumptions, outputs, and failure states.</span></div>
+          <div class="contrib-item"><strong>Curated biological resources</strong><span>Versioned regulons, annotations, priors, and mappings.</span></div>
+          <div class="contrib-item"><strong>Benchmarks and replication</strong><span>Tests that show where a capability generalizes and fails.</span></div>
+          <div class="contrib-item"><strong>Evidence standards</strong><span>Shared definitions of support, uncertainty, discordance, and limits.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="scientific-value" class="why-sanofi">
+      <div class="wrap why-sanofi-inner">
+        <div class="why-sanofi-head">
+          <p class="eyebrow">The larger idea</p>
+          <h2>Reuse the science without weakening it.</h2>
+          <p class="why-sanofi-lede">
+            Strong analyses should not end as one-off notebooks. Their assumptions, checks, outputs, and limits should carry forward.
+          </p>
+        </div>
+
+        <div class="impact-grid">
+          <article class="impact-card">
+            <span class="impact-number">01</span>
+            <h3>Coordinate the analysis</h3>
+            <p>
+              Connect data, methods, and agents through explicit inputs, assumptions, outputs, and stop conditions.
+            </p>
+          </article>
+
+          <article class="impact-card">
+            <span class="impact-number">02</span>
+            <h3>Keep biological context</h3>
+            <p>
+              Keep replication, confounding, robustness, and provenance visible through interpretation.
+            </p>
+          </article>
+
+          <article class="impact-card">
+            <span class="impact-number">03</span>
+            <h3>Combine evidence sources</h3>
+            <p>
+              Generalist agents, internal models, and foundation models can contribute evidence within the same reviewable structure.
+            </p>
+          </article>
+
+          <article class="impact-card">
+            <span class="impact-number">04</span>
+            <h3>Build capability over time</h3>
+            <p>
+              Each validated node expands what the system can answer without changing its standards.
+            </p>
+          </article>
+        </div>
+
+        <div class="final-thesis">
+          <small>Core thesis</small>
+          <p>
+            The value is to automate cannonical workflows while preserving the scientific rigor and interpretability of the analysis - <bold>Accelerating Discovery</bold>.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div>
+        <strong style="color:var(--purple)">CellState Agent</strong>
+        <div>Scientific demo.</div>
+      </div>
+      <div>
+        <strong>Joshua Rivera, Ph.D.</strong><br>
+        Dana-Farber Cancer Institute<br>
+        Harvard Medical School
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
