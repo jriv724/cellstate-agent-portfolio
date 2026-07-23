@@ -1,0 +1,31 @@
+{
+  "blocking_reasons": [],
+  "capability_id": "CAP-DESEQ-003",
+  "capability_version": "1.1.1",
+  "comparison_direction": "NBM - NDMM",
+  "evidence_class": "exploratory_lodo_conserved",
+  "group_replicate_counts": {
+    "NBM": 55,
+    "NDMM": 233
+  },
+  "input_gene_count": 15412,
+  "negative_effect_interpretation": "higher in NDMM",
+  "positive_effect_interpretation": "higher in NBM",
+  "retained_gene_count": 5213,
+  "schema_version": "1.1.0",
+  "significant_gene_count": 3320,
+  "terminal_status": "completed_with_warnings",
+  "tested_gene_count": 5213,
+  "upregulated_in_group_a_count": 2213,
+  "upregulated_in_group_b_count": 1107,
+  "warnings": [
+    {
+      "code": "EXPLORATORY_CONFOUNDED_DESIGN",
+      "context": {
+        "policy": "exploratory_lodo"
+      },
+      "message": "EXPLORATORY CONFOUNDED-DESIGN ANALYSIS: group and dataset are not independently identifiable. Features are conserved across dataset-level leave-one-out analyses but may still reflect systematic dataset effects.",
+      "severity": "warning"
+    }
+  ]
+}

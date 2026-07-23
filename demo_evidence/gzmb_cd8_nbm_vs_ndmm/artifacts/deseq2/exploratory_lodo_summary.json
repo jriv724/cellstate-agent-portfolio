@@ -1,0 +1,20 @@
+{
+  "confounded_design_policy": "exploratory_lodo",
+  "conserved_feature_count": 2395,
+  "design": "exploratory ~ group",
+  "eligible_folds": 10,
+  "estimable_folds": 10,
+  "robustness": "dataset-level LODO",
+  "robustness_sufficient": true,
+  "skipped_or_failed_folds": 0,
+  "thresholds": {
+    "lodo_full_analysis_fdr": 0.05,
+    "lodo_max_opposite_log2fc": 0.0,
+    "lodo_min_direction_fraction": 0.8,
+    "lodo_min_estimable_folds": 3,
+    "lodo_min_median_abs_log2fc": 0.25,
+    "lodo_require_two_datasets_per_group": true
+  },
+  "total_folds": 10,
+  "warning": "EXPLORATORY CONFOUNDED-DESIGN ANALYSIS: group and dataset are not independently identifiable. Features are conserved across dataset-level leave-one-out analyses but may still reflect systematic dataset effects."
+}

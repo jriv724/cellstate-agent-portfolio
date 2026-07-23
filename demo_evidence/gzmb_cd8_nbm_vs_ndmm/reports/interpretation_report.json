@@ -1,0 +1,45 @@
+{
+  "biological_programs": [
+    "Widespread differential expression between NBM and NDMM in GZMB CD8 T cells: 3,320 significant genes among 5,213 tested (CAP-DESEQ-003:deseq2_results).",
+    "Subset of differential signals are conserved across dataset-level leave-one-out folds (CAP-DESEQ-003:conserved_features and CAP-DESEQ-003:exploratory_lodo_summary), consistent with within-bundle reproducibility.",
+    "TF-activity programs were inferred from signed regulons (DoRothEA/CollecTRI resources) and summarized as per-resource activities and a consensus TF-activity output (CAP-TF-002:tf_activity_by_resource, CAP-TF-002:tf_activity_consensus), but multiple QC issues limit robustness of program-to-regulator mapping."
+  ],
+  "candidate_regulators": [
+    "See CAP-TF-002:significant_tf_activity and CAP-TF-002:tf_activity_consensus for TFs nominated by signed TF-activity modeling (artifact outputs list available in the bundle).",
+    "Prioritize TFs appearing in CAP-TF-002:tf_activity_consensus with multi-resource support and estimable models (use CAP-TF-002:tf_activity_estimability and CAP-TF-002:tf_activity_by_resource to filter).",
+    "Avoid prioritizing TFs flagged only in single-resource support entries (CAP-TF-002 warning TF_ACTIVITY_SINGLE_RESOURCE_SUPPORT) until further validation."
+  ],
+  "created_at_utc": "2026-07-22T02:45:13.152975+00:00",
+  "critic_limitations_referenced": [
+    "EXPLORATORY CONFOUNDED-DESIGN ANALYSIS: group and dataset are not independently identifiable. Features are conserved across dataset-level leave-one-out analyses but may still reflect systematic dataset effects. (see CAP-DESEQ-003:warnings.EXPLORATORY_CONFOUNDED_DESIGN)",
+    "Deterministic evidence does not establish causality; DESeq2 outputs are association-based (see CAP-DESEQ-003:limitations).",
+    "TF-activity results include multiple QC warnings (CAP-TF-002:warnings) including genes absent from regulons, non-estimable models, resource discordance, and some signals supported by a single resource; these weaken inference from TF models to robust regulatory conclusions."
+  ],
+  "evidence_bundle_id": "e70fcedaf8e1250049a18c0560d9572dd80f8e1c4abe9705b1c517b23e3d09a5",
+  "experimental_follow_up": [
+    "Run dataset-adjusted differential expression models or a formal meta-analysis that includes dataset as a covariate or uses random-effects to separate group from dataset effects (address the EXPLORATORY_CONFOUNDED_DESIGN warning).",
+    "Recompute or validate conserved features in an independent cohort(s) not included in the represented_datasets list (see design_assessment.represented_datasets).",
+    "For top candidate genes, inspect per-dataset effect sizes and raw counts (from CAP-DESEQ-003:full_unadjusted_deseq2_results and CAP-DESEQ-003:deseq2_results) to determine whether signals are driven by one or a few datasets.",
+    "For TF activity outputs, prioritize TFs with multi-resource consensus and re-run TF analyses after addressing missing regulon coverage (reduce impact of CAP-TF-002:warnings:TF_ACTIVITY_GENES_NOT_IN_REGULONS and TF_ACTIVITY_NON_ESTIMABLE_MODELS).",
+    "Consider orthogonal validation (e.g., protein-level assays or targeted experiments) for high-priority findings before downstream mechanistic interpretation."
+  ],
+  "hypotheses": [
+    "Hypothesis: Some fraction of the 3,320 genes differentially expressed between NBM and NDMM in GZMB CD8 T cells reflect biologically reproducible differences across datasets, as indicated by LODO-conserved features (CAP-DESEQ-003:conserved_features).",
+    "Hypothesis: A subset of TFs identified in CAP-TF-002 consensus outputs may contribute to the observed expression differences; however, this is model-based and weakened by TF-activity QC warnings (CAP-TF-002:warnings).",
+    "Hypothesis: Some observed differential-expression signals may be driven by dataset-level effects rather than underlying biology because group and dataset are not independently identifiable in this exploratory analysis (CAP-DESEQ-003:design_assessment warnings EXPLORATORY_CONFOUNDED_DESIGN)."
+  ],
+  "interpretation_confidence": "moderate",
+  "observations": [
+    "Analysis context: cell state GZMB CD8 T cell; contrast Normal Bone Marrow (NBM) \u2212 Newly Diagnosed Multiple Myeloma (NDMM); inference_class exploratory_lodo_conserved (CAP-DESEQ-003, CAP-TF-002).",
+    "Dataset footprint and design: 167,355 contributing cells; eligible biological pseudobulk replicates NBM=55, NDMM=233; genes in atlas=15,412; minimum cells per replicate reported 100 (deterministic_evidence.atlas_qc).",
+    "Design and estimability: DESeq2 design formula ~ group (group coefficient 'NBM - NDMM'), design full-rank and estimable, residual degrees of freedom = 286 (CAP-DESEQ-003:design_assessment).",
+    "Differential expression outputs (DESeq2, CAP-DESEQ-003): tested_gene_count = 5,213 (retained genes 5,213); significant_gene_count = 3,320; of significant genes, 2,213 are higher in NBM and 1,107 are higher in NDMM (CAP-DESEQ-003:deseq2_results, deterministic_evidence.CAP-DESEQ-003).",
+    "Reproducibility within the bundle: features conserved across dataset-level leave-one-out (LODO) analyses (CAP-DESEQ-003:conserved_features and CAP-DESEQ-003:exploratory_lodo_summary), indicating LODO-level conservation but not dataset-adjusted inference.",
+    "TF-activity modeling (CAP-TF-002) completed with signed regulon resources and produced per-resource TF activity outputs, a significant TF activity table, and a consensus TF activity table (CAP-TF-002:tf_activity_by_resource, CAP-TF-002:significant_tf_activity, CAP-TF-002:tf_activity_consensus).",
+    "TF-activity QC warnings (CAP-TF-002 warnings): 1,373 eligible genes absent from all signed regulons retained in the model universe; 944 resource-program-TF models non-estimable; 264 resource discordance instances preserved as QC; 12 significant activities supported by only one resource (CAP-TF-002 warnings).",
+    "Statistical execution: DESeq2 pseudobulk differential expression was performed and full unadjusted statistics are available (CAP-DESEQ-003:full_unadjusted_deseq2_results).",
+    "Status and scope: both CAP-DESEQ-003 and CAP-TF-002 completed with warnings; outputs include artifacts suitable for per-gene and per-dataset inspection (artifact list in evidence bundle)."
+  ],
+  "schema_version": "1.0.0",
+  "summary": "DESeq2 pseudobulk differential expression comparing Normal Bone Marrow (NBM) to Newly Diagnosed Multiple Myeloma (NDMM) in GZMB CD8 T cells identifies widespread gene-expression differences (3,320 significant genes among 5,213 tested; 2,213 higher in NBM, 1,107 higher in NDMM) and features conserved across dataset-level leave-one-out folds. Signed TF-activity modeling produced significant and consensus TF outputs, but multiple TF-model QC warnings reduce confidence in regulator assignments. A key limitation is that group and dataset are not independently identifiable in this exploratory LODO analysis, so some signals may reflect dataset effects rather than true biology. Results are appropriate for hypothesis generation and prioritization but require dataset-adjusted modeling and independent/orthogonal validation before stronger regulatory or causal claims."
+}

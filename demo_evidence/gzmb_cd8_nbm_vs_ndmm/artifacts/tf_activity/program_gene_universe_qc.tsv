@@ -1,0 +1,2 @@
+program_id	feature_set_id	cell_state	contrast	statistic_orientation	signed_statistic_name	eligible_gene_count	genes_in_any_signed_regulon	genes_not_in_any_signed_regulon	complete_gene_universe_retained
+GZMB CD8 T cell:NBM-NDMM	exploratory_lodo_conserved_features	GZMB CD8 T cell	NBM − NDMM	condition_a_minus_condition_b	full_unadjusted_DESeq2_log2FoldChange	2395	1022	1373	True

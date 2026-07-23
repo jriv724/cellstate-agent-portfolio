@@ -1,0 +1,7 @@
+{
+  "filtered_gene_count": 10199,
+  "input_gene_count": 15412,
+  "minimum_count": 10,
+  "minimum_qualifying_replicates": 3,
+  "retained_gene_count": 5213
+}

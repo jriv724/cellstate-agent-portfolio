@@ -1,0 +1,79 @@
+{
+  "cache_schema_version": 1,
+  "capability_id": "CAP-TF-002",
+  "consensus_definition": "at least 2 significant resources with one shared increased or decreased direction",
+  "correction_family_definition": "Benjamini-Hochberg across all estimable TF p-values independently within each resource/database x feature program",
+  "directional_consensus_count": 1,
+  "directional_consensus_regulators": [
+    "SPI1"
+  ],
+  "discordance_count": 264,
+  "duplicate_program_gene_count": 0,
+  "eligible_gene_counts": {
+    "GZMB CD8 T cell:NBM-NDMM": 2395
+  },
+  "estimable_model_count": 505,
+  "gene_not_in_any_signed_regulon_count": 1373,
+  "implementation_version": "1.0.0",
+  "interpretation_boundary": "A positive or negative CAP-TF-002 activity score is a model-based inference from signed gene-level statistics and signed regulon weights. It is not direct evidence of TF protein activation, binding, phosphorylation, causality, or therapeutic tractability.",
+  "model_definition": "y_i = beta_0 + beta_1*x_i + epsilon_i over every eligible program gene; x_i is the signed TF-target weight or zero for a non-target; activity_score is the slope t-statistic; df=n_eligible_genes-2; two-sided Student-t p-value",
+  "node_version": "1.0.0",
+  "nonestimable_model_count": 944,
+  "program_count": 1,
+  "significant_activity_count": 14,
+  "significant_regulator_count": 13,
+  "thresholds": {
+    "correction_family": "resource_x_feature_program",
+    "dorothea_confidence_levels": [
+      "A",
+      "B",
+      "C"
+    ],
+    "fdr_cutoff": 0.1,
+    "feature_type": "gene",
+    "gene_column": "feature_id",
+    "minimum_consensus_resources": 2,
+    "minimum_eligible_genes": 3,
+    "minimum_overlapping_targets": 5,
+    "multiple_testing_method": "benjamini-hochberg",
+    "organism": "human",
+    "signed_statistic_column": "signed_statistic",
+    "statistic_orientation": "condition_a_minus_condition_b",
+    "ulm_implementation_mode": "documented_decoupler_v2_ulm_formula"
+  },
+  "ulm_implementation_mode": "documented_decoupler_v2_ulm_formula",
+  "warnings": [
+    {
+      "code": "TF_ACTIVITY_GENES_NOT_IN_REGULONS",
+      "context": {
+        "count": 1373
+      },
+      "message": "Eligible genes absent from all signed regulons were retained in the model universe",
+      "severity": "warning"
+    },
+    {
+      "code": "TF_ACTIVITY_NON_ESTIMABLE_MODELS",
+      "context": {
+        "count": 944
+      },
+      "message": "Some resource-program-TF models were non-estimable",
+      "severity": "warning"
+    },
+    {
+      "code": "TF_ACTIVITY_RESOURCE_DISCORDANCE",
+      "context": {
+        "count": 264
+      },
+      "message": "Resource discordance was preserved as QC evidence",
+      "severity": "warning"
+    },
+    {
+      "code": "TF_ACTIVITY_SINGLE_RESOURCE_SUPPORT",
+      "context": {
+        "count": 12
+      },
+      "message": "Significant activity supported by only one resource was retained without consensus",
+      "severity": "warning"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "cache_key": "f2844e92b58d3051cb411ef47ea5651c6d0bb3a12969547c150f019d160e393a",
+  "cache_schema_version": 1,
+  "capability_id": "CAP-TF-002",
+  "completion_status": "complete",
+  "creation_timestamp_utc": "2026-07-22T02:45:12.962138+00:00",
+  "input_signature": "2be22945eaa24f972464f3756039e2390a3772491d70767db10d78b904a845ab",
+  "node_version": "1.0.0",
+  "output_files": [
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/tf_activity/validated_signed_gene_statistics.tsv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/tf_activity/excluded_or_unmatched_gene_statistics.tsv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/tf_activity/program_gene_universe_qc.tsv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/tf_activity/signed_regulon_resource_qc.tsv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/tf_activity/resource_program_coverage_qc.tsv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/tf_activity/normalized_signed_regulon_edges.tsv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/tf_activity/tf_activity_estimability.tsv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/tf_activity/tf_activity_by_resource.tsv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/tf_activity/significant_tf_activity.tsv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/tf_activity/tf_activity_consensus.tsv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/tf_activity/tf_activity_discordance.tsv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/tf_activity/heatmap_source_table.tsv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/tf_activity/qc_summary.json",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/tf_activity/provenance.json"
+  ],
+  "parameters": {
+    "compact_program_metadata": [
+      {
+        "cell_state": "GZMB CD8 T cell",
+        "condition_a": "NBM",
+        "condition_b": "NDMM",
+        "contrast": "NBM \u2212 NDMM",
+        "contrast_direction": "group_a_minus_group_b",
+        "feature_count": 2395,
+        "feature_direction": "signed_statistic",
+        "feature_set_id": "exploratory_lodo_conserved_features",
+        "feature_type": "gene",
+        "program_id": "GZMB CD8 T cell:NBM-NDMM",
+        "signed_statistic_name": "full_unadjusted_DESeq2_log2FoldChange",
+        "source_artifact_hash": "deb912155a34c2fb81f6a9c535a400b369fc9a4872507f0faef6f68e37d09847",
+        "source_artifact_path": "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/deseq2/conserved_features.csv",
+        "source_cache_key": "2564b7e31a39edfe2f0805880813067806936b0c00ec9e8f96eda914cd590f04",
+        "source_capability_id": "CAP-DESEQ-003",
+        "source_capability_version": "1.1.1",
+        "statistic_orientation": "condition_a_minus_condition_b",
+        "upstream_analysis_method": "exploratory_unadjusted_DESeq2_dataset_LODO",
+        "upstream_analysis_parameters": "{\"design_formula\": \"~ group\"}",
+        "upstream_provenance": "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/deseq2/provenance.json"
+      }
+    ],
+    "correction_family": "resource_x_feature_program",
+    "dorothea_confidence_levels": [
+      "A",
+      "B",
+      "C"
+    ],
+    "fdr_cutoff": 0.1,
+    "feature_type": "gene",
+    "gene_column": "feature_id",
+    "implementation_version": "1.0.0",
+    "input_artifact_hashes": {
+      "[private-cluster-path-omitted]/outputs/final_video_20260722/20260722T022710061257Z_GZMB_CD8_T_cell_NBM_vs_NDMM/complete_signed_statistics.tsv": "2be22945eaa24f972464f3756039e2390a3772491d70767db10d78b904a845ab",
+      "[private-cluster-path-omitted]/resources/tf_activity/collectri_human_omnipath_2026-07-21.tsv": "96307536195b7e6230ea3ecfaa52a13344ae10040569b2f37685a12fb81e609e",
+      "[private-cluster-path-omitted]/resources/tf_activity/dorothea_human_abc_v1.18.0.tsv": "63f05c993724f24372a99d24160fa7fb07cbde75e356856b31beae3328b692f3"
+    },
+    "minimum_consensus_resources": 2,
+    "minimum_eligible_genes": 3,
+    "minimum_overlapping_targets": 5,
+    "model_definition": "y_i = beta_0 + beta_1*x_i + epsilon_i over every eligible program gene; x_i is the signed TF-target weight or zero for a non-target; activity_score is the slope t-statistic; df=n_eligible_genes-2; two-sided Student-t p-value",
+    "multiple_testing_method": "benjamini-hochberg",
+    "normalized_signed_gene_statistics_hash": "ca463c26935cd64e83b9bc17ff665fe6527bf05cba398b35233b4459c30aca18",
+    "normalized_signed_resource_hashes": {
+      "CollecTRI": "549994e1222127f5486dc5c0c871f782bbbcbb7fc97d07f9f840021101f66bd8",
+      "DoRothEA": "2e9de16bb6dc217df06bc044e75103eb9cbf46844ba9ae64ba298996355f4f76"
+    },
+    "organism": "human",
+    "signed_statistic_column": "signed_statistic",
+    "statistic_orientation": "condition_a_minus_condition_b",
+    "ulm_implementation_mode": "documented_decoupler_v2_ulm_formula"
+  },
+  "software_versions": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "python": "3.10.20",
+    "scipy": "1.15.2"
+  },
+  "source_dataset_signature": "9a85640420790026fcaa53a9b94c4f2e1f4e3a175c69fb21cc0ab9150b9940e3",
+  "warnings": [
+    {
+      "code": "TF_ACTIVITY_GENES_NOT_IN_REGULONS",
+      "context": {
+        "count": 1373
+      },
+      "message": "Eligible genes absent from all signed regulons were retained in the model universe",
+      "severity": "warning"
+    },
+    {
+      "code": "TF_ACTIVITY_NON_ESTIMABLE_MODELS",
+      "context": {
+        "count": 944
+      },
+      "message": "Some resource-program-TF models were non-estimable",
+      "severity": "warning"
+    },
+    {
+      "code": "TF_ACTIVITY_RESOURCE_DISCORDANCE",
+      "context": {
+        "count": 264
+      },
+      "message": "Resource discordance was preserved as QC evidence",
+      "severity": "warning"
+    },
+    {
+      "code": "TF_ACTIVITY_SINGLE_RESOURCE_SUPPORT",
+      "context": {
+        "count": 12
+      },
+      "message": "Significant activity supported by only one resource was retained without consensus",
+      "severity": "warning"
+    }
+  ]
+}

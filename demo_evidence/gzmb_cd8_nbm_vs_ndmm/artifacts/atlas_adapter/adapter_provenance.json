@@ -1,0 +1,24 @@
+{
+  "adapter": "cellstate.adapters.AtlasPseudobulkAdapter",
+  "adapter_cache_key": "2840483700ca029bfb9805062a890551333ff3450281ec3cf9b43197579a97ac",
+  "atlas_identity": "9a85640420790026fcaa53a9b94c4f2e1f4e3a175c69fb21cc0ab9150b9940e3",
+  "atlas_path": "[private-cluster-path-omitted]/adata_3p04M_clean_obs_060426.h5ad",
+  "cell_state": "GZMB CD8 T cell",
+  "cells_contributing": 167355,
+  "comparison_direction": "group_a_minus_group_b",
+  "count_source": "layers/counts",
+  "dataset_column": "dataset",
+  "genes": 15412,
+  "independent_unit": "sample",
+  "minimum_cells_per_sample_state": 100,
+  "ordered_groups": [
+    "NBM",
+    "NDMM"
+  ],
+  "outputs": [
+    "[private-cluster-path-omitted]/adapter_counts.tsv",
+    "[private-cluster-path-omitted]/adapter_sample_metadata.tsv",
+    "[private-cluster-path-omitted]/adapter_sample_qc.tsv"
+  ],
+  "samples": 288
+}

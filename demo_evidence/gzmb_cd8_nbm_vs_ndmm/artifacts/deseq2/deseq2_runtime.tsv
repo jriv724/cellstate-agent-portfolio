@@ -1,0 +1,5 @@
+key	value
+R	4.4.1
+DESeq2	1.44.0
+design_formula	~group
+coefficient_extracted	NBM minus NDMM

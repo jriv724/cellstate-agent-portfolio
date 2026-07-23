@@ -1,0 +1,78 @@
+{
+  "cache_key": "2564b7e31a39edfe2f0805880813067806936b0c00ec9e8f96eda914cd590f04",
+  "cache_schema_version": 1,
+  "capability_id": "CAP-DESEQ-003",
+  "completion_status": "complete",
+  "creation_timestamp_utc": "2026-07-22T02:44:57.027190+00:00",
+  "input_signature": "64ef82c9171724263cf5141879bdfceb4260768456d805c54c5837ff6f8b6a5d",
+  "node_version": "1.1.1",
+  "output_files": [
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/deseq2/deseq2_results.tsv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/deseq2/deseq2_design_assessment.json",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/deseq2/deseq2_input_sample_metadata.tsv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/deseq2/deseq2_gene_filter_summary.json",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/deseq2/deseq2_summary.json",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/deseq2/deseq2_runtime.tsv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/deseq2/full_unadjusted_deseq2_results.csv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/deseq2/lodo_fold_results.csv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/deseq2/lodo_feature_summary.csv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/deseq2/conserved_features.csv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/deseq2/skipped_lodo_folds.csv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/deseq2/exploratory_lodo_summary.json",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/deseq2/deseq2_input_counts.tsv",
+    "demo_evidence/gzmb_cd8_nbm_vs_ndmm/artifacts/deseq2/provenance.json"
+  ],
+  "parameters": {
+    "alpha": 0.05,
+    "cell_count_column": "n_cells",
+    "comparison_direction": "group_a_minus_group_b",
+    "confounded_design_policy": "exploratory_lodo",
+    "dataset_column": "dataset",
+    "design_policy": "~ group for one dataset; ~ dataset + group for multiple datasets only when overlapping and full rank; explicit exploratory_lodo may use ~ group when adjusted inference is confounded",
+    "gene_minimum_count": 10,
+    "gene_minimum_replicates": 3,
+    "group_column": "group",
+    "groups": [
+      "NBM",
+      "NDMM"
+    ],
+    "independent_filtering": true,
+    "input_signatures": {
+      "counts": "64ef82c9171724263cf5141879bdfceb4260768456d805c54c5837ff6f8b6a5d",
+      "metadata": "9fda0dfdf21691780ca5b80281ca415dc1bd3577130eb7200dc226539633ea2b",
+      "upstream_provenance": "b61c94448415b4753ee34c572ddfe95b98cdc32e2df124e44b6e0bf961e8c88a"
+    },
+    "lodo_full_analysis_fdr": 0.05,
+    "lodo_max_opposite_log2fc": 0.0,
+    "lodo_min_direction_fraction": 0.8,
+    "lodo_min_estimable_folds": 3,
+    "lodo_min_median_abs_log2fc": 0.25,
+    "lodo_require_two_datasets_per_group": true,
+    "minimum_cells_per_replicate": 100,
+    "minimum_replicates_per_group": 3,
+    "patient_column": null,
+    "replicate_column": "sample",
+    "rscript_path": "/usr/local/bin/Rscript",
+    "schema_version": "1.1.0",
+    "upstream_cache_key": "atlas-adapter:9a85640420790026fcaa53a9b94c4f2e1f4e3a175c69fb21cc0ab9150b9940e3",
+    "upstream_capability_id": "CAP-DESEQ-001"
+  },
+  "software_versions": {
+    "DESeq2": "1.44.0",
+    "R": "4.4.1",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "python": "3.10.20"
+  },
+  "source_dataset_signature": "9a85640420790026fcaa53a9b94c4f2e1f4e3a175c69fb21cc0ab9150b9940e3",
+  "warnings": [
+    {
+      "code": "EXPLORATORY_CONFOUNDED_DESIGN",
+      "context": {
+        "policy": "exploratory_lodo"
+      },
+      "message": "EXPLORATORY CONFOUNDED-DESIGN ANALYSIS: group and dataset are not independently identifiable. Features are conserved across dataset-level leave-one-out analyses but may still reflect systematic dataset effects.",
+      "severity": "warning"
+    }
+  ]
+}

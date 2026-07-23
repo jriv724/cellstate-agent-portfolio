@@ -1,0 +1,41 @@
+{
+  "blocking_reasons": [],
+  "design_column_count": 2,
+  "design_columns": [
+    "Intercept",
+    "group[NBM vs NDMM]"
+  ],
+  "design_formula": "~ group",
+  "design_rank": 2,
+  "estimable": true,
+  "full_rank": true,
+  "group_coefficient": "NBM - NDMM",
+  "group_replicate_counts": {
+    "NBM": 55,
+    "NDMM": 233
+  },
+  "represented_datasets": [
+    "DISCO_ref",
+    "GSE120221_RAW_10x",
+    "GSE124310_MM_immune_RAW",
+    "GSE194122_BMMC",
+    "GSE271107_MM_precursors",
+    "MMRF_ImmuneAtlas",
+    "Matteo_Italy",
+    "NBM_66k",
+    "inhouse_Harvard_Novartis",
+    "inhouse_NBM"
+  ],
+  "residual_degrees_of_freedom": 286,
+  "shared_datasets": [],
+  "warnings": [
+    {
+      "code": "EXPLORATORY_CONFOUNDED_DESIGN",
+      "context": {
+        "policy": "exploratory_lodo"
+      },
+      "message": "EXPLORATORY CONFOUNDED-DESIGN ANALYSIS: group and dataset are not independently identifiable. Features are conserved across dataset-level leave-one-out analyses but may still reflect systematic dataset effects.",
+      "severity": "warning"
+    }
+  ]
+}

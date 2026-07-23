@@ -1,0 +1,11 @@
+dataset,group,biological_replicates
+DISCO_ref,NBM,21
+GSE120221_RAW_10x,NBM,7
+GSE124310_MM_immune_RAW,NDMM,3
+GSE194122_BMMC,NBM,7
+GSE271107_MM_precursors,NDMM,1
+MMRF_ImmuneAtlas,NDMM,206
+Matteo_Italy,NDMM,23
+NBM_66k,NBM,7
+inhouse_Harvard_Novartis,NBM,4
+inhouse_NBM,NBM,9
