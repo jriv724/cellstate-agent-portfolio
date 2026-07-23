@@ -22,6 +22,21 @@
 
 CellState Agent is a research prototype for turning natural-language computational-biology questions into auditable, approval-gated scientific analyses.
 
+## Public Evidence Bundle
+
+A complete, auditable example analysis is available for **GZMB CD8 T cells in NBM versus NDMM**.
+
+- [Evidence bundle overview](demo_evidence/gzmb_cd8_nbm_vs_ndmm/README.md)
+- [Final scientific report](demo_evidence/gzmb_cd8_nbm_vs_ndmm/reports/scientific_report.pdf)
+- [Structured scientific report](demo_evidence/gzmb_cd8_nbm_vs_ndmm/reports/scientific_report.json)
+- [Critic report](demo_evidence/gzmb_cd8_nbm_vs_ndmm/reports/critic_report.json)
+- [Interpretation report](demo_evidence/gzmb_cd8_nbm_vs_ndmm/reports/interpretation_report.json)
+
+The bundle includes patient-level pseudobulk differential expression, design and estimability checks, leave-one-dataset-out robustness analysis, cross-resource transcription-factor activity inference, figures, provenance records, manifests, and SHA-256 checksums.
+
+The workflow separates deterministic statistical analysis from LLM-based scientific critique and interpretation. Evidence integration consumes structured results and structured critiques rather than unrestricted narrative output.
+
+
 ## Auditable workflow
 
 LangGraph coordinates planning, approval, execution, evidence review, and reporting. Scientific calculations remain in deterministic capability nodes: the language-model agents can critique evidence and explain results, but they cannot alter computed values.
